@@ -1,0 +1,6 @@
+Data Peserta Sanbercode Bootcamp Nodejs Adonis Backend
+1. Nama: Rohmat Kamil   
+2. Email: rohmatkamil450@gmail.com
+3. Sistem Operasi yang digunakan: Windows 8
+4. Akun Gitlab: https://github.com/rohmatk
+5. Akun Telegram: R 
