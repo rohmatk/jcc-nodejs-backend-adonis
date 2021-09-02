@@ -32,6 +32,6 @@ switch(args[2]){
         break;
     case "balikKata":
         let param = args[3];
-        console.log(balikKata(param));
+        (balikKata(param));
         break;
 }
