@@ -95,13 +95,16 @@ let dataHandling = () => {
 }
 
 let balikKata = (param) => {
-    let kebalikan = "";
-    for(let i = param.length - 1; i >= 0; i--){
-        kebalikan += param[i];
+    for (let i = param.length - 1; i >= 1; i--) {
+        if (param[i] == ",") {
+            process.stdout.write(" ");
+        }
+        else {
+            process.stdout.write(param[i]);
+        }
     }
-    let newParam = kebalikan.replace(/,/g, " ");
-    return newParam;
 }
+
 
 
 module.exports = {
