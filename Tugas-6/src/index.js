@@ -22,7 +22,7 @@ switch(command){
         let param = args[3];
         console.log(checkScore(param));
         break;
-    case "filter":
+    case "filterData":
         let [ahmad, regi, bondra, iqbal, putri] = data;
         let keyword = args[3];
         //keyword menggunakan index ke-3 args jadi harus tetap mengetikkan filter

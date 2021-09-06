@@ -39,7 +39,7 @@ switch (command) {
     console.log((0, _berlatihEs.checkScore)(param));
     break;
 
-  case "filter":
+  case "filterData":
     var _data = _slicedToArray(_berlatihEs.data, 5),
         ahmad = _data[0],
         regi = _data[1],
