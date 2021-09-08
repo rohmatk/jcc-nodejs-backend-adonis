@@ -1,34 +1,34 @@
-export const sapa = nama => {
-    return `Halo Selamat Pagi, ${nama}`;
+export const sapa = (nama) =>`halo selamat pagi, ${nama}`
+export const convert = (name,dom,age) => {
+    let nama = name 
+    let domisili = dom 
+    let umur = parseInt(age)
+    let konversi = {nama, domisili, umur}
+    return konversi
 }
-
-//object literals
-export const convert = (nama, domisili, umur) => {
-    let output = {
-        nama,
-        domisili,
-        umur
+export const checkScore = (data) => {
+    let datas = data.split(",")
+    let nama = datas[0].slice(5) 
+    let kelas = datas[1].slice(6)
+    let score = parseInt(datas[2].slice(6))
+    let konversi = {nama, kelas, score}
+    return konversi
+}
+export const filterData = (kelas) =>{
+    const data = [
+        { name: "Ahmad", class: "adonis"},
+        { name: "Regi", class: "laravel"},
+        { name: "Bondra", class: "adonis"},
+        { name: "Iqbal", class: "vuejs" },
+        { name: "Putri", class: "Laravel" }
+      ]
+    let hasil = []
+    for (let i=0;i<data.length;i++){
+        if (data[i].class == kelas){
+            hasil.push(data[i])
+        } else{}
     }
-    return output;
+
+    return hasil
+
 }
-
-export const checkScore = param => {
-    let output = {};
-    let arr = param.split(/,/);
-    for (let i = 0; i < arr.length; i++){
-        let [key, value] = arr[i].split(':');
-        output[[key]] = value;
-    }
-    return output;
-}
-
-export const data = [
-    { name: "Ahmad", class: "adonis"},
-    { name: "Regi", class: "laravel"},
-    { name: "Bondra", class: "adonis"},
-    { name: "Iqbal", class: "vuejs" },
-    { name: "Putri", class: "Laravel" }
-];
-
-export const filterData = (param, ...rest) =>  rest.filter(data => data.class === param);
-

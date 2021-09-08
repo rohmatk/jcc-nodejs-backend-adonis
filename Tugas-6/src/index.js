@@ -1,33 +1,24 @@
-import {
-    sapa,
-    checkScore,
-    convert,
-    data,
-    filterData
-} from './lib/berlatihEs6';
+import {sapa, convert, checkScore, filterData} from './lib/eslib.js'
 
-const args = process.argv;
-const [command] = process.argv.slice(2);
-
-switch(command){
+var args = process.argv
+switch (args[2]){
     case "sapa":
-        let nama = args[3];
-        console.log(sapa(nama));
+        console.log(sapa(args[3]))
         break;
     case "convert":
-        let [name, domisili, umur] = [args[3], args[4], args[5]];
-        console.log(convert(name, domisili, parseInt(umur)));
+        console.log(convert(args[3],args[4],args[5]))
         break;
     case "checkScore":
-        let param = args[3];
-        console.log(checkScore(param));
+        console.log(checkScore(args[3]))
         break;
     case "filterData":
-        let [ahmad, regi, bondra, iqbal, putri] = data;
-        let keyword = args[3];
-        //keyword menggunakan index ke-3 args jadi harus tetap mengetikkan filter
-        console.log(filterData(keyword, ahmad, regi, bondra, iqbal, putri))
+        console.log(filterData(args[3]))
         break;
     default:
-        break; 
+        console.log("Perintah yang anda berikan salah!")
+        console.log(
+            `INSTRUKSI
+            node <perintah> <parameter>`
+        )
+        break;
 }
