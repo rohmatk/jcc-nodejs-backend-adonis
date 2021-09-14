@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
-const VenueRouter = require('./routes/vanue')
-require('dotenv').config()
+const VanueRouter = require('./routes/vanue')
+
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.use('/vanue', VenueRouter)
+app.use('/vanue', VanueRouter)
 
 app.get('/', (req, res) => {
     res.status(200).json({
