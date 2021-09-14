@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
-const VenueRouter = require('./routes/venue')
+const VenueRouter = require('./routes/vanue')
 require('dotenv').config()
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
-app.use('/venue', VenueRouter)
+app.use('/vanue', VenueRouter)
 
 app.get('/', (req, res) => {
     res.status(200).json({

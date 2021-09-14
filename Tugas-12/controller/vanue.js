@@ -1,4 +1,4 @@
-const Venue = require('../models/venue');
+const Venue = require('../models/vanue');
 
 class VenuesController {
     static async save(req, res) {

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const VenuesController = require('../controller/venue')
+const VenuesController = require('../controller/vanue')
 
 router.post('/', VenuesController.save)
 
