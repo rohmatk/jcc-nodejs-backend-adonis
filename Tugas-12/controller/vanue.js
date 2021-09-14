@@ -1,34 +1,34 @@
-const Venue = require('../models/vanue');
+const Vanue = require('../models/vanue');
 
-class VenuesController {
+class VanuesController {
     static async save(req, res) {
         // console.log(req.body.name)
-        let newVenue = Venue.build({
+        let newVanue = Vanue.build({
             name: req.body.name,
             address: req.body.address,
             phone: req.body.phone
         })
-        console.log("cek : ", newVenue instanceof Venue);
+        console.log("cek : ", newVanue instanceof Venue);
         console.log(newVenue.dataValues);
-        await newVenue.save();
+        await newVanue.save();
         res.status(200).json({
             message: "Created",
-            data: newVenue
+            data: newVanue
         })
     }
     
     static async getAll(req, res) {
-        let getVenue = await Venue.findAll({
+        let getVanue = await Vanue.findAll({
             attributes: ['name', 'address', 'phone']
         });
         res.status(200).json({
             message: "GET ALL",
-            data: getVenue
+            data: getVanue
         })
     }
 
     static async getByID(req, res) {
-        let getVenue = await Venue.findAll({
+        let getVanue = await Vanue.findAll({
             attributes: ['name', 'address', 'phone'],
             where: {
                 id: [req.params.id]
@@ -36,12 +36,12 @@ class VenuesController {
         });
         res.status(200).json({
             message: "GET ByID",
-            data: getVenue
+            data: getVanue
         })
     }
 
     static async updateByID(req, res) {
-        await Venue.update({
+        await Vanue.update({
             name: req.body.name,
             address: req.body.address,
             phone: req.body.phone
@@ -51,7 +51,7 @@ class VenuesController {
             }
         });
 
-        let getVenue = await Venue.findAll({
+        let getVanue = await Vanue.findAll({
             attributes: ['name', 'address', 'phone'],
             where: {
                 id: [req.params.id]
@@ -59,26 +59,26 @@ class VenuesController {
         });
         res.status(200).json({
             message: "GET ByID",
-            data: getVenue
+            data: getVanue
         })
     }
 
     static async deleteByID(req, res) {
-        await Venue.destroy({
+        await Vanue.destroy({
             where: {
                 id: [req.params.id]
             }
         });
 
-        let getVenue = await Venue.findAll({
+        let getVanue = await Vanue.findAll({
             attributes: ['name', 'address', 'phone']
         });
         res.status(200).json({
             message: "GET ByID",
-            data: getVenue
+            data: getVanue
         })
     }
     
 }
 
-module.exports = VenuesController;
+module.exports = VanuesController;

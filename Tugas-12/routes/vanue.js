@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
-const VenuesController = require('../controller/vanue')
+const VanuesController = require('../controller/vanue')
 
-router.post('/', VenuesController.save)
+router.post('/', VanuesController.save)
 
-router.get('/', VenuesController.getAll)
+router.get('/', VanuesController.getAll)
 
-router.get('/:id', VenuesController.getByID)
+router.get('/:id', VanuesController.getByID)
 
-router.put('/:id', VenuesController.updateByID)
+router.put('/:id', VanuesController.updateByID)
 
-router.delete('/:id', VenuesController.deleteByID)
+router.delete('/:id', VanuesController.deleteByID)
 
 module.exports = router;
