@@ -23,8 +23,14 @@ import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 
 Route.group(() => {
   Route.get('/', 'GenresController.index');
+  
 }).prefix('/genres')
 
 Route.group(() => {
   Route.get('/', 'MoviesController.index');
+  Route.post('/', 'MoviesController.store');
+  Route.get('/:id', 'MoviesController.show');
+  Route.put('/:id', 'MoviesController.update');
+  Route.delete('/:id', 'MoviesController.destroy');
 }).prefix('/movies')
+
