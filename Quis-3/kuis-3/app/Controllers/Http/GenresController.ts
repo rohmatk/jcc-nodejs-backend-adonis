@@ -24,6 +24,7 @@ export default class GenresController {
             data: validated
         })
     }
+
     async show({ response, params }: HttpContextContract) {
         let id = params.id
         const genres = await Database.query().select('*').from('genres').where('id', id)
@@ -34,6 +35,7 @@ export default class GenresController {
             movies: movies
         })
     }
+    
     async update({ request, response, params } : HttpContextContract) {
         let validate = schema.create({
             name: schema.string()
