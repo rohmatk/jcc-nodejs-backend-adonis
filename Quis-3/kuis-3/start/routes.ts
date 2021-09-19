@@ -23,7 +23,10 @@ import HealthCheck from '@ioc:Adonis/Core/HealthCheck'
 
 Route.group(() => {
   Route.get('/', 'GenresController.index');
-  
+  Route.post('/', 'GenresController.store');
+  Route.get('/:id', 'GenresController.show');
+  Route.put('/:id', 'GenresController.update');
+  Route.delete('/:id', 'GenresController.destroy');
 }).prefix('/genres')
 
 Route.group(() => {
@@ -34,3 +37,10 @@ Route.group(() => {
   Route.delete('/:id', 'MoviesController.destroy');
 }).prefix('/movies')
 
+Route.get('health', async ({ response }) => {
+  const report = await HealthCheck.getReport()
+  
+  return report.healthy
+    ? response.ok(report)
+    : response.badRequest(report)
+})
