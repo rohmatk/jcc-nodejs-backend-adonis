@@ -8,7 +8,7 @@ export default class Fields extends BaseSchema {
       table.increments('id');
       table.string('name');
       table.enum('type', ['futsal', 'minisoccer', 'basketball']);
-      table.integer('venue_id').unsigned().references('id').inTable('venues');
+      table.integer('venue_id').unsigned().references('id').inTable('venues').onDelete('cascade').onUpdate('cascade');
       table.timestamps(true, true);
     })
   }
