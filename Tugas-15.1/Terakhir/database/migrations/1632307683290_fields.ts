@@ -7,7 +7,7 @@ export default class Fields extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id');
       table.string('name');
-      table.enum('type', ['futsal', 'minisoccer', 'basketball']);
+      table.enum('type', ['futsal', 'minisoccer', 'basketball', 'soccer', 'volleyball']);
       table.integer('venue_id').unsigned().references('id').inTable('venues').onDelete('cascade').onUpdate('cascade');
       table.timestamps(true, true);
     })

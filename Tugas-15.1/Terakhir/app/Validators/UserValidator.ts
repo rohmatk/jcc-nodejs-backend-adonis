@@ -29,8 +29,11 @@ export default class UserValidator {
       rules.email(),
       rules.unique({ table: 'users', column: 'email' })
     ]),
-    password: schema.string(),
-    full_name: schema.string(),
+	password: schema.string({}, [
+		rules.minLength(6)
+	  ]),
+	full_name: schema.string(),
+	role: schema.enum(['venue_owner', 'user']),
     phone: schema.string({}, [
       rules.mobile({ locales: ['id-ID'] , strict: true})
     ])

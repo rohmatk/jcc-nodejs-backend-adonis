@@ -3,11 +3,13 @@ import Hash from '@ioc:Adonis/Core/Hash'
 import {
   column,
   beforeSave,
-  BaseModel, beforeCreate, manyToMany,
+  BaseModel, 
+  beforeCreate, 
+  manyToMany, 
+  ManyToMany
 } from '@ioc:Adonis/Lucid/Orm'
-import { uuid } from 'uuidv4';
-import Booking from "App/Models/Booking";
-import type {ManyToMany} from "@ioc:Adonis/Lucid/Orm";
+import { uuid } from 'uuidv4'
+import Booking from "App/Models/Booking"
 
 export default class User extends BaseModel {
   public static selfAssignPrimaryKey = true
@@ -16,13 +18,19 @@ export default class User extends BaseModel {
   public id: string
 
   @column()
-  public full_name: string
+  public fullName: string
 
   @column()
   public email: string
 
   @column({ serializeAs: null })
   public password: string
+
+  @column()
+  public role: string
+
+  @column.dateTime()
+  public verifiedAt: DateTime
 
   @column()
   public phone: string
@@ -51,7 +59,7 @@ export default class User extends BaseModel {
   @manyToMany(() => Booking, {
     pivotTable: 'player_bookings',
     localKey: 'id',
-    pivotForeignKey: 'player_id',
+    pivotForeignKey: 'user_id',
     relatedKey: 'id',
     pivotRelatedForeignKey: 'booking_id'
   })

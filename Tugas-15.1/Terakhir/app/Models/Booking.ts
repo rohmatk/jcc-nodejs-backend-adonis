@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import {BaseModel, column, ManyToMany, manyToMany} from '@ioc:Adonis/Lucid/Orm'
+import {BaseModel, column, manyToMany, ManyToMany} from '@ioc:Adonis/Lucid/Orm'
 import User from "App/Models/User";
 
 export default class Booking extends BaseModel {
@@ -12,9 +12,9 @@ export default class Booking extends BaseModel {
   public fieldId: number
 
   @column({
-    columnName: 'venue_id'
+    columnName: 'user_id'
   })
-  public venueId: number
+  public userId: string
 
   @column.dateTime({
     columnName: 'play_date_start'
@@ -25,11 +25,6 @@ export default class Booking extends BaseModel {
     columnName: 'play_date_finish'
   })
   public playDateFinish: DateTime
-
-  @column({
-    columnName: 'booking_user_id'
-  })
-  public bookingUserId: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -42,7 +37,7 @@ export default class Booking extends BaseModel {
     localKey: 'id',
     pivotForeignKey: 'booking_id',
     relatedKey: 'id',
-    pivotRelatedForeignKey: 'player_id'
+    pivotRelatedForeignKey: 'user_id'
   })
   public players: ManyToMany<typeof User>
 }

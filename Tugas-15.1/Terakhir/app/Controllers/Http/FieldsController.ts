@@ -1,13 +1,19 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import FieldValidator from "App/Validators/FieldValidator";
 import Field from "App/Models/Field";
+import Venue from "App/Models/Venue";
 
 export default class FieldsController {
+
   public async index ({response, params}: HttpContextContract) {
     const venue_id = params.venue_id;
 
     try {
-      const data = await Field.query().where('venue_id', venue_id);
+      const data = await Field.query().where('venue_id', venue_id).select(['id', 'name', 'type', 'venue_id']);
+
+      if (data.length  == 0) {
+        throw new Error("Venue ID is not exists");
+      }
 
       return response.status(200).json({
         response_code: "00",
@@ -15,7 +21,7 @@ export default class FieldsController {
         data
       })
     } catch (err) {
-      return response.json({
+      return response.status(400).json({
         response_code: "01",
         error_message: err.message
       });
@@ -26,11 +32,11 @@ export default class FieldsController {
     try {
       const venue_id = params.venue_id;
       const id = params.id
-
       const data = await Field
         .query()
         .where('venue_id', venue_id)
         .andWhere('id', id)
+        .select(['id', 'name', 'type', 'venue_id'])
         .firstOrFail();
 
       return response.status(200).json({
@@ -45,17 +51,30 @@ export default class FieldsController {
         error_message: errors.message
       });
     }
+
   }
-  public async store ({request, response, params}: HttpContextContract) {
-    const venue_id = params.venue_id;
+
+  public async store ({request, response, auth, params}: HttpContextContract) {
+    const venueId = params.venue_id;
+    const userId = auth.user?.id;
     let name = request.input('name');
     let type = request.input('type');
 
     await request.validate(FieldValidator);
 
     try {
+      const venue = await Venue.query()
+        .where('id', venueId)
+        // @ts-ignore
+        .andWhere('user_id', userId)
+        .first();
+
+      if (!venue) {
+        throw new Error(`Venue anda dengan id ${venueId} tidak ditemukan`);
+      }
+
       const data = await Field.create({
-        name, type, venue_id
+        name, type, venueId
       });
 
       return response.status(201).json({
@@ -64,15 +83,16 @@ export default class FieldsController {
         data
       });
     } catch (err) {
-      return response.json({
+      return response.status(400).json({
         response_code: "01",
         error_message: err.message
       });
     }
   }
 
-  public async update ({request, response, params}: HttpContextContract) {
+  public async update ({request, response, auth, params}: HttpContextContract) {
     const venue_id = params.venue_id;
+    const user_id = auth.user?.id;
     const id = params.id;
     const name = request.input('name');
     const type = request.input('type');
@@ -80,31 +100,36 @@ export default class FieldsController {
     await request.validate(FieldValidator);
 
     try {
+      // @ts-ignore
+      await Venue.query().where('id', venue_id).andWhere('user_id', user_id).firstOrFail();
+
       let data = await Field.query().where('venue_id', venue_id).andWhere('id', id).firstOrFail();
       data['name'] = name;
       data['type'] = type;
-
       await data.save();
-
       return response.status(201).json({
         response_code: "00",
         response_message: `Data Venue ${venue_id} Field ${id} Updated`,
         data
       });
     } catch (err) {
-      return response.json({
+      return response.status(400).json({
         response_code: "01",
-        error_message: err.message
+        error_message: "update failed"
       });
     }
 
   }
 
-  public async destroy ({response, params}) {
+  public async destroy ({response, auth, params}) {
     const venue_id = params.venue_id;
+    const user_id = auth.user?.id;
     const id = params.id;
 
     try {
+      // @ts-ignore
+      await Venue.query().where('id', venue_id).andWhere('user_id', user_id).firstOrFail();
+
       const data = await Field.query().where('venue_id', venue_id).andWhere('id', id).firstOrFail();
       await data.delete();
 
@@ -113,10 +138,11 @@ export default class FieldsController {
         response_message: `Data Venue ${venue_id} Field ${id} Successfully Deleted`
       });
     } catch (err) {
-      return response.json({
+      return response.status(400).json({
         response_code: "01",
-        error_message: err.message
+        error_message: "delete failed"
       });
     }
+
   }
 }

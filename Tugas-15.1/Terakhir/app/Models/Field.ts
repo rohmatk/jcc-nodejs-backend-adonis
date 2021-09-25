@@ -1,20 +1,22 @@
 import { DateTime } from 'luxon'
-import {BaseModel, column} from '@ioc:Adonis/Lucid/Orm'
-import { TypeField } from "Contracts/TypeField";
+import {BaseModel, belongsTo, column, hasMany, BelongsTo, HasMany} from '@ioc:Adonis/Lucid/Orm'
+import { TypeField } from "Contracts/TypeField"
+import Venue from "App/Models/Venue"
+import Booking from "App/Models/Booking"
 
 export default class Field extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
   @column()
-  public name: string;
+  public name: string
 
   @column()
   public type: TypeField
-
+  
   @column()
   public venueId: number
-
+  
   @column.dateTime({
     autoCreate: true,
     serialize: value  => value.toFormat('dd LLL yyyy HH:mm:ss')
@@ -28,6 +30,9 @@ export default class Field extends BaseModel {
   })
   public updatedAt: DateTime
 
-  // @belongsTo(() => Venue)
-  // public venue: BelongsTo<typeof Venue>
+  @belongsTo(() => Venue)
+  public venue: BelongsTo<typeof Venue>
+
+  @hasMany(() => Booking)
+  public bookings: HasMany<typeof Booking>
 }
