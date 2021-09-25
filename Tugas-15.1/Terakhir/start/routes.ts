@@ -21,6 +21,12 @@
 import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
-  Route.resource('venues', 'VenuesController').apiOnly();
-  Route.resource('venues.fields', 'FieldsController').apiOnly();
+  Route.resource('venues', 'VenuesController').apiOnly().middleware({'*': 'auth'});
+  Route.resource('venues.fields', 'FieldsController').apiOnly().middleware({'*': 'auth'});
+
+  Route.post('/register', 'AuthController.register');
+  Route.post('/login', 'AuthController.login');
+  Route.resource('venues.bookings', 'BookingsController').only(['store', 'index']).middleware({'*': 'auth'})
+  Route.post('/venues/:venue_id/bookings/:booking_id', 'BookingsController.books').middleware('auth');
+  Route.get('/venues/:venue_id/bookings/:booking_id', 'BookingsController.detailBooking').middleware('auth');
 }).prefix('/api');

@@ -5,7 +5,7 @@ import Venue from "App/Models/Venue";
 export default class VenuesController {
 
   public async index ({ response }: HttpContextContract) {
-    const data = await Venue.all();
+    const data = await Venue.query().preload('fields');
 
     return response.status(200).json({
       response_code: "00",
@@ -17,7 +17,7 @@ export default class VenuesController {
   public async show ({response, params}: HttpContextContract) {
     let id = params.id;
     try {
-      const data = await Venue.findOrFail(id);
+      const data = await Venue.query().preload('fields').where('id', id).firstOrFail();
 
       return response.status(200).json({
         response_code: "00",
