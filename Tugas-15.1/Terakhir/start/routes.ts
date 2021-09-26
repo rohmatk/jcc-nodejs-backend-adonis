@@ -26,11 +26,11 @@ Route.group(() => {
     .apiOnly()
     .middleware({
       '*': ['auth', 'verify'],
-      'update': 'role:venue_owner',
-      'index': 'role:user,venue_owner',
-      'show': 'role:user,venue_owner',
-      'store': 'role:venue_owner',
-      'destroy': 'role:venue_owner'
+      'update': 'role:owner',
+      'index': 'role:user,owner',
+      'show': 'role:user,owner',
+      'store': 'role:owner',
+      'destroy': 'role:owner'
     });
 
   /* FIELDS ROUTING */
@@ -38,11 +38,11 @@ Route.group(() => {
     .apiOnly()
     .middleware({
       '*': ['auth', 'verify'],
-      'index': 'role:user,venue_owner',
-      'show': 'role:user,venue_owner',
-      'store': 'role:venue_owner',
-      'update': 'role:venue_owner',
-      'destroy': 'role:venue_owner'
+      'index': 'role:user,owner',
+      'show': 'role:user,owner',
+      'store': 'role:owner',
+      'update': 'role:owner',
+      'destroy': 'role:owner'
     });
 
   /* BOOKINGS ROUTING */
@@ -51,19 +51,19 @@ Route.group(() => {
     .middleware({
       '*': ['auth', 'verify'],
       'store': 'role:user',
-      'index': 'role:user,venue_owner',
+      'index': 'role:user,owner',
       'update': 'role:user',
       'destroy': 'role:user',
-      'show': 'role:user,venue_owner'
+      'show': 'role:user,owner'
     })
   Route.post('/bookings/:id/join', 'BookingsController.joinBooking').middleware(['auth', 'verify', 'role:user']);
   Route.post('/bookings/:id/unjoin', 'BookingsController.unjoinBooking').middleware(['auth', 'verify', 'role:user']);
   Route.get('/bookings/schedules', 'BookingsController.schedules').middleware(['auth', 'verify', 'role:user']);
 
-  /* AUTH ROUTING */
+  /* AUTHENTICATION ROUTING */
   Route.post('/register', 'AuthController.register');
   Route.post('/login', 'AuthController.login').middleware('verify');
-  Route.post('/verification', 'AuthController.verification');
+  Route.post('/otp-confirmation', 'AuthController.verification');
   Route.post('/regenerate-otp', 'AuthController.regenerateOtp');
 
 }).prefix('/api/v1');

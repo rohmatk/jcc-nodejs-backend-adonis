@@ -1,6 +1,28 @@
 import { DateTime } from 'luxon'
 import {BaseModel, column, manyToMany, ManyToMany} from '@ioc:Adonis/Lucid/Orm'
-import User from "App/Models/User";
+import User from "App/Models/User"
+
+/**
+ *  @swagger
+ *  definitions:
+ *    Booking:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: string
+ *        field_id:
+ *          type: number
+ *        user_id:
+ *          type: string
+ *        play_date_start:
+ *          type: datetime
+ *        play_date_finish:
+ *          type: datetime
+ *      required:
+ *        - field_id
+ *        - play_date_start
+ *        - play_date_finish
+ */
 
 export default class Booking extends BaseModel {
   @column({ isPrimary: true })
@@ -20,7 +42,7 @@ export default class Booking extends BaseModel {
     columnName: 'play_date_start'
   })
   public playDateStart: DateTime
-
+  
   @column.dateTime({
     columnName: 'play_date_finish'
   })
@@ -31,7 +53,7 @@ export default class Booking extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
-
+  
   @manyToMany(() => User, {
     pivotTable: 'player_bookings',
     localKey: 'id',

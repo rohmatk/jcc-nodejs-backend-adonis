@@ -1,5 +1,12 @@
 import { DateTime } from 'luxon'
-import {BaseModel, belongsTo, column, hasMany, BelongsTo, HasMany} from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel, 
+  belongsTo, 
+  column, 
+  hasMany, 
+  BelongsTo, 
+  HasMany
+} from '@ioc:Adonis/Lucid/Orm'
 import { TypeField } from "Contracts/TypeField"
 import Venue from "App/Models/Venue"
 import Booking from "App/Models/Booking"

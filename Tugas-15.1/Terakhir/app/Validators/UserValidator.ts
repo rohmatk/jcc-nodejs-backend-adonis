@@ -33,7 +33,7 @@ export default class UserValidator {
 		rules.minLength(6)
 	  ]),
 	full_name: schema.string(),
-	role: schema.enum(['venue_owner', 'user']),
+	role: schema.enum(['owner', 'user']),
     phone: schema.string({}, [
       rules.mobile({ locales: ['id-ID'] , strict: true})
     ])

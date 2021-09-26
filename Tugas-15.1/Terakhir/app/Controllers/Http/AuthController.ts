@@ -124,7 +124,7 @@ export default class AuthController {
     })
     await Mail.sendLater((message) => {
       message
-        .from('admin@venue.com')
+        .from('kml@kamijual.my.id')
         .to(email)
         .subject('OTP Verification')
         .htmlView('emails/verification', { full_name: fullName, otpCode })
@@ -139,7 +139,7 @@ export default class AuthController {
 
   /**
    * @swagger
-   * /api/v1/verification:
+   * /api/v1/otp-confirmation:
    *   post:
    *     description: Verificate the new registered user using OTP
    *     tags:
@@ -246,7 +246,7 @@ export default class AuthController {
 
     const emailSchema = schema.create({
       email: schema.string({}, [
-        rules.email()
+        rules.email() 
       ])
     });
     await request.validate({schema: emailSchema});
@@ -278,7 +278,7 @@ export default class AuthController {
     });
     await Mail.sendLater((message) => {
       message
-        .from('admin@venue.com')
+        .from('kml@kamijual.my.id')
         .to(email)
         .subject('OTP Verification')
         .htmlView('emails/verification', { full_name: user.fullName, otpCode })
