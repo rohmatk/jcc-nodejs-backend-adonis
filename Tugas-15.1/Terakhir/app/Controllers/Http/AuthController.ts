@@ -7,7 +7,7 @@ import {rules, schema} from "@ioc:Adonis/Core/Validator";
 import Mail from "@ioc:Adonis/Addons/Mail";
 
 export default class AuthController {
-  /**
+    /**
    * @swagger
    * /api/v1/login:
    *   post:
@@ -74,7 +74,7 @@ export default class AuthController {
     })
   }
 
-  /**
+        /**
    * @swagger
    * /api/v1/register:
    *   post:

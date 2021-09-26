@@ -7,7 +7,6 @@
 
 import Env from '@ioc:Adonis/Core/Env'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
-import Application from '@ioc:Adonis/Core/Application'
 
 const databaseConfig: DatabaseConfig = {
   /*
@@ -20,9 +19,8 @@ const databaseConfig: DatabaseConfig = {
   | file.
   |
   */
-  connection: Application.inDev ? 'mysql' : 'pg',
-
-  connections: {
+  
+  connection: Env.get('DB_CONNECTION'),
     /*
     |--------------------------------------------------------------------------
     | PostgreSQL config
@@ -34,15 +32,19 @@ const databaseConfig: DatabaseConfig = {
     | npm i pg
     |
     */
-    pg: {
-      client: 'pg',
-      connection: {
-        host: Env.get('PG_HOST'),
-        port: Env.get('PG_PORT'),
-        user: Env.get('PG_USER'),
-        password: Env.get('PG_PASSWORD', ''),
-        database: Env.get('PG_DB_NAME'),
-      },
+    connections: {
+      pg: {
+        client: 'pg',
+        connection: {
+          host: Env.get('PG_HOST'),
+          port: Env.get('PG_PORT'),
+          user: Env.get('PG_USER'),
+          password: Env.get('PG_PASSWORD', ''),
+          database: Env.get('PG_DB_NAME'),
+          ssl: {
+            rejectUnauthorized:false
+          },
+        },
       migrations: {
         naturalSort: true,
       },

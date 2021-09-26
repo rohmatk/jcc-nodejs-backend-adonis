@@ -30,7 +30,7 @@ Route.group(() => {
       'index': 'role:user,owner',
       'show': 'role:user,owner',
       'store': 'role:owner',
-      'destroy': 'role:owner'
+      'destroy': 'role:owner',
     });
 
   /* FIELDS ROUTING */
