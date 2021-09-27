@@ -5,4 +5,4 @@ Node.js adalah platform untuk mengembangkan aplikasi web menggunakan bahasa pemo
 ```
 JABAR CODING CAMP
 ```
-link website [web](https://rkml-adonisjs.herokuapp.com/docs/index.html)
+link website [RESTful API adonisjs](https://rkml-adonisjs.herokuapp.com/docs/index.html)
